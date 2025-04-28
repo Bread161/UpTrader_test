@@ -43,3 +43,25 @@ python manage.py runserver
 ![Снимок экрана 2025-04-28 191038](https://github.com/user-attachments/assets/5c802b27-37c0-4877-98fb-9619b7cf22e4)
 
 
+
+если хотите быстро проверить работу, то можете вызвать команду в терминале "python manage.py shell" и  вставить данный текст "from menu.models import Menu, MenuItem
+
+# Создаем меню
+main_menu = Menu.objects.create(name='main_menu')
+
+# Верхний уровень
+home = MenuItem.objects.create(title='Главная', url='/', menu=main_menu, order=1)
+about = MenuItem.objects.create(title='О нас', url='/about/', menu=main_menu, order=2)
+services = MenuItem.objects.create(title='Услуги', url='/services/', menu=main_menu, order=3)
+contacts = MenuItem.objects.create(title='Контакты', url='/contacts/', menu=main_menu, order=4)
+
+# Второй уровень (подпункты для "Услуги")
+service1 = MenuItem.objects.create(title='Разработка сайтов', url='/services/web/', menu=main_menu, parent=services, order=1)
+service2 = MenuItem.objects.create(title='SEO оптимизация', url='/services/seo/', menu=main_menu, parent=services, order=2)
+
+# Третий уровень (подпункты для "Разработка сайтов")
+MenuItem.objects.create(title='Интернет-магазины', url='/services/web/shops/', menu=main_menu, parent=service1, order=1)
+MenuItem.objects.create(title='Корпоративные сайты', url='/services/web/corporate/', menu=main_menu, parent=service1, order=2)
+
+print(' Меню успешно создано!')
+" 
